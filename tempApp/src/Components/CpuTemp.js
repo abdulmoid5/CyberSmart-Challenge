@@ -1,29 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import CircularBar from '../common/CircularBar';
+import tempApi from '../api/Temps';
 
 function CpuTemp(props) {
   const [data, setData] = useState([]);
 
+  useEffect(() => {
+    loadTemps();
+  }, []);
 
-  
-  //   setInterval(function() {
-  //     cpuTemp();
-  //   }, 2000);
+  //   API set to call at 30min interval
+  setInterval(function() {
+    loadTemps();
+  }, 1800000);
 
-  //   async function cpuTemp() {
-  //     fetch('http://localhost:3000/cputemp')
-  //       .then(response => response.json())
-  //       .then(json => setData(json))
-  //       .catch(error => console.error(error))
-  //       .finally(() => setLoading(false));
-  //   }
+  //   Function defined to call cpuTemperature API
+  loadTemps = async () => {
+    const response = await tempApi.getTemps();
+    setData(response.data);
+  };
 
   return (
     <View style={styles.container}>
       {/* //Temperature figs fetching from node server */}
-      <Text style={styles.heading}>Cpu Current Temperature</Text>
-      <CircularBar />
+      <Text style={styles.heading}>Cpu Temperature</Text>
+      <CircularBar text1={data.main} text2={data.cores} text3={data.max} />
 
       <View style={styles.tempContainer}>
         <Text style={styles.text}>Main</Text>

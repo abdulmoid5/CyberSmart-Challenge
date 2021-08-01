@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 
-function CircularBar(props) {
+function CircularBar({text1,text2,text3}) {
   return (
     <View style={styles.container}>
       <ProgressCircle
@@ -12,7 +12,7 @@ function CircularBar(props) {
         color="red"
         shadowColor="#ededed"
         bgColor="#fff">
-        {/* <Text style={{ fontSize: 18 }}>{data.main}</Text> */}
+        <Text style={{fontSize: 18}}>{text1}</Text>
       </ProgressCircle>
       <ProgressCircle
         percent={52}
@@ -21,7 +21,7 @@ function CircularBar(props) {
         color="green"
         shadowColor="#ededed"
         bgColor="#fff">
-        {/* <Text style={{ fontSize: 18 }}>{data.cores}</Text> */}
+        <Text style={{fontSize: 18}}>{text2}</Text>
       </ProgressCircle>
       <ProgressCircle
         percent={63}
@@ -30,7 +30,7 @@ function CircularBar(props) {
         color="#3399FF"
         shadowColor="#ededed"
         bgColor="#fff">
-        {/* <Text style={{ fontSize: 18 }}>{data.max}</Text> */}
+        <Text style={{fontSize: 18}}>{text3}</Text>
       </ProgressCircle>
     </View>
   );
