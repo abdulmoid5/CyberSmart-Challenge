@@ -14,12 +14,17 @@ the fact that the mobile screen is off (eg, the user is not using the mobile pho
     cd cpuTemp
     node server.js
     
+ Do make sure the URL in 
+    tempApp/api/client.js 
+is either set to lcoal host or to your local IP in order for the API to work. 
+    
 ## To run mobile app 
     cd tempApp
     react-native run-ios
  
  make sure you chage directory from parent folder.
  
+
     
 
 
