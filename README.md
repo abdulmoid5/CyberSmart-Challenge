@@ -1,7 +1,8 @@
 # CyberSmart-Challenge
 
 We’d like to answer the question:
-##'Does the weather influence my computer’s core temperature?’
+<br>
+'Does the weather influence my computer’s core temperature?’<br>
 Hence we’d like you to create an application that:
 (1) reads the CPU temperature from the machine
 (2) reads the ambient temperature from a weather API (feel free to choose one but https://openweathermap.org/api looks suitable)
