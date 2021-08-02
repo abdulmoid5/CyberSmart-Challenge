@@ -145,7 +145,6 @@
 				87CEAD9113F7540C74717A94 /* Pods-tempApp-tempAppTests.debug.xcconfig */,
 				7020E4E3A4B2C8D32C93E732 /* Pods-tempApp-tempAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -485,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZGQ7AWY8M8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = tempApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZGQ7AWY8M8;
 				INFOPLIST_FILE = tempApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

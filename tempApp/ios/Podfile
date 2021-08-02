@@ -12,6 +12,8 @@ target 'tempApp' do
     :hermes_enabled => false
   )
 
+  pod 'RNBackgroundFetch', :path => '../node_modules/react-native-background-fetch'
+
   target 'tempAppTests' do
     inherit! :complete
     # Pods for testing

@@ -2,14 +2,23 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import CircularBar from '../common/CircularBar';
 import tempApi from '../api/Temps';
+import BackgroundTask from 'react-native-background-task';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Running backgrounnds task when app is closed
+BackgroundTask.define(() => {
+  loadTemps();
+  BackgroundTask.finish();
+});
+
 function CpuTemp(props) {
+  //Initialized data with hook
   const [data, setData] = useState([]);
 
   // Used to fetch once the app reloads
   useEffect(() => {
     loadTemps();
+    BackgroundTask.finish();
   }, []);
 
   //   API set to call at 30min interval

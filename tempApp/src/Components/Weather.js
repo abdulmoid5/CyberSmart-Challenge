@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import BackgroundTask from 'react-native-background-task';
 import Divider from '../common/Divider';
+
+// Running backgrounnds task when app is closed
+BackgroundTask.define(() => {
+  getWeather();
+  BackgroundTask.finish();
+});
 
 function Weather(props) {
   // initialising values to be fetched from API
@@ -20,6 +27,7 @@ function Weather(props) {
   // Used to fetch once the app reloads
   useEffect(() => {
     getWeather();
+    BackgroundTask.schedule();
   }, []);
 
   //   API set to call at 30min interval
