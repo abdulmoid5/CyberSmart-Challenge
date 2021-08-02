@@ -1,38 +1,53 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Divider from '../common/Divider';
 
 function Weather(props) {
+  // initialising values to be fetched from API
   const [info, setInfo] = useState({
+    icon: 'loading',
     name: 'loading',
+    country: 'loading',
+    desc: 'loading',
     temp: 'loadinng',
     feels_like: 'loading',
     temp_min: 'loading',
     temp_max: 'loading',
     humidity: 'loadinng',
-    desc: 'loading',
-    icon: 'loading',
   });
 
+  // Used to fetch once the app reloads
   useEffect(() => {
     getWeather();
   }, []);
 
-  const getWeather = () => {
+  //   API set to call at 30min interval
+  setInterval(function() {
+    getWeather();
+  }, 1800000);
+
+  //   Function defined to call current weather API
+  const getWeather = async () => {
     fetch(
-      'https://api.openweathermap.org/data/2.5/weather?q=London&appid=d26a4bec9daa067c3885aae89574b2ba&units=metric',
+      'https://api.openweathermap.org/data/2.5/weather?q=London&appid=d26a4bec9daa067c3885aae89574b2ba&units=imperial',
     )
       .then(data => data.json())
       .then(results => {
+        //   setting values to results from API
         setInfo({
+          icon: results.weather[0].icon,
           name: results.name,
+          country: results.sys.country,
+          desc: results.weather[0].description,
           temp: results.main.temp,
+          feels_like: results.main.feels_like,
           temp_min: results.main.temp_min,
           temp_max: results.main.temp_max,
-          feels_like: results.main.feels_like,
           humidity: results.main.humidity,
-          desc: results.weather[0].description,
-          icon: results.weather[0].icon,
         });
+        // Storing the fetched results locally
+        AsyncStorage.setItem('results', JSON.stringify(results));
       });
   };
 
@@ -40,33 +55,40 @@ function Weather(props) {
     <View style={styles.container}>
       <Text style={styles.heading}>Current Weather</Text>
 
+      {/* image icon  */}
       <Image
         style={styles.image}
         source={{
           uri: 'https://openweathermap.org/img/w/' + info.icon + '.png',
         }}
       />
-      <Text style={styles.text}>{info.name}</Text>
-      <Text style={styles.text}>{info.desc}</Text>
 
-      <Text style={styles.text}>{info.temp}</Text>
-      <Text style={styles.text}>{info.feels_like}</Text>
-      <Text style={styles.text}>
-        {info.temp_min}/{info.temp_max}
-      </Text>
-      <Text style={styles.text}>{info.humidity}</Text>
+      {/* Description container  */}
+      <View style={styles.details}>
+        <Text style={styles.location}>
+          {info.name}, {info.country}
+        </Text>
+        <Divider />
+        <Text style={styles.text}>{info.desc}</Text>
+        <Text style={styles.text}>Temperature: {info.temp}°F</Text>
+        <Text style={styles.text}>Feel's like: {info.feels_like}°F</Text>
+        <Text style={styles.text}>
+          Min:{info.temp_min}°F Max:{info.temp_max}°F
+        </Text>
+        <Text style={styles.text}>Humidity: {info.humidity}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: '10%',
+    marginVertical: '-10%',
+    alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: '#fff',
+    backgroundColor: 'gray',
     width: '90%',
-    height: '30%',
-
+    height: '50%',
     shadowOffset: {
       width: 10,
       height: 10,
@@ -78,10 +100,10 @@ const styles = StyleSheet.create({
   //   h1
   heading: {
     textAlign: 'center',
-    paddingTop: 10,
+    top: 20,
     fontSize: 25,
     fontWeight: 'bold',
-    color: '#000947',
+    color: '#fff',
   },
 
   image: {
@@ -90,10 +112,24 @@ const styles = StyleSheet.create({
     width: '50%',
   },
 
-  text: {
-    fontSize: 16,
+  //   name
+  location: {
+    fontSize: 30,
     fontWeight: 'bold',
-    color: '#000947',
+    color: '#fff',
+  },
+
+  //   remaining details containner
+  details: {
+    bottom: 50,
+    textAlign: 'center',
+  },
+
+  //   body text
+  text: {
+    fontSize: 20,
+    fontWeight: '300',
+    color: '#ededed',
   },
 });
 

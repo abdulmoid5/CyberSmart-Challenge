@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import CircularBar from '../common/CircularBar';
 import tempApi from '../api/Temps';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function CpuTemp(props) {
   const [data, setData] = useState([]);
@@ -20,11 +21,13 @@ function CpuTemp(props) {
   loadTemps = async () => {
     const response = await tempApi.getTemps();
     setData(response.data);
+    // Storing the fetched results locally
+    AsyncStorage.setItem('data', JSON.stringify(data));
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Cpu Temperature</Text>
+      <Text style={styles.heading}>CPU Temperature</Text>
       {/* //Temperature figs fetching from node server */}
       <CircularBar text1={data.main} text2={data.cores} text3={data.max} />
 
@@ -33,7 +36,7 @@ function CpuTemp(props) {
         <Text style={styles.text}>Cores</Text>
         <Text style={styles.text}>Max</Text>
       </View>
-      <Text style={styles.disclaimer}>The temperatures are defined in °C</Text>
+      <Text style={styles.disclaimer}>The temperatures are defined in °F</Text>
     </View>
   );
 }
@@ -46,7 +49,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: '90%',
     height: '30%',
-
     shadowOffset: {
       width: 10,
       height: 10,

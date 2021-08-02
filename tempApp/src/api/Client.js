@@ -1,8 +1,8 @@
 import {create} from 'apisauce';
 
 const apiclient = create({
-  baseURL: 'http://localhost:3000/',
-  URL: 'https://api.openweathermap.org/data/2.5/weather?q=London&appid=d26a4bec9daa067c3885aae89574b2ba&units=metric',
+  // localhost not to be used as AVD cannot verify
+  baseURL: 'http://172.20.10.2:3000/',
 });
 
 export default apiclient;
