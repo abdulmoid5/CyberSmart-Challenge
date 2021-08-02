@@ -22,6 +22,7 @@ is either set to lcoal host http://localhost:3000/ or to your local IP in order 
 ## To run mobile app 
     cd tempApp
     react-native run-ios
+    react-native run-android
  
  make sure you chage directory from parent folder.
  
