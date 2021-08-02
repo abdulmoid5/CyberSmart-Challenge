@@ -6,6 +6,7 @@ import tempApi from '../api/Temps';
 function CpuTemp(props) {
   const [data, setData] = useState([]);
 
+  // Used to fetch once the app reloads
   useEffect(() => {
     loadTemps();
   }, []);
@@ -23,8 +24,8 @@ function CpuTemp(props) {
 
   return (
     <View style={styles.container}>
-      {/* //Temperature figs fetching from node server */}
       <Text style={styles.heading}>Cpu Temperature</Text>
+      {/* //Temperature figs fetching from node server */}
       <CircularBar text1={data.main} text2={data.cores} text3={data.max} />
 
       <View style={styles.tempContainer}>
