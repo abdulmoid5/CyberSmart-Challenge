@@ -22,7 +22,7 @@ is either set to lcoal host http://localhost:3000/ or to your local IP in order 
 ## To run mobile app 
     
     cd tempApp
-    npm innstall
+    npm install
     cd ios 
     pod install
     react-native run-ios
