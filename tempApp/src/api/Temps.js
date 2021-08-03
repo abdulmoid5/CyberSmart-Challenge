@@ -1,8 +1,8 @@
-import client from './client';
+import Client from './Client';
 
 const endpoint = '/cputemp';
 
-const getTemps = () => client.get(endpoint);
+const getTemps = () => Client.get(endpoint);
 
 export default {
   getTemps,
