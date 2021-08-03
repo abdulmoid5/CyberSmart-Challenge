@@ -20,7 +20,11 @@ the fact that the mobile screen is off (eg, the user is not using the mobile pho
 is either set to lcoal host http://localhost:3000/ or to your local IP in order for the API to work. (AVD manager does not support localhost but a specific IP.
     
 ## To run mobile app 
+    
     cd tempApp
+    npm install
+    cd ios 
+    pod install
     react-native run-ios
     react-native run-android
  
